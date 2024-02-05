@@ -1,0 +1,40 @@
+body {
+  background-color: #f0f8ff;
+}
+.hero-title {
+  display: inline-block;
+  background-image: linear-gradient(120deg, #bd34fe 30%, #41d1ff);
+  text-shadow: 6px 6px 8px #e0ffff;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 60px;
+  margin-top: 25px;
+  margin-left: 50px;
+}
+
+.nav-list {
+  margin-top: 25px;
+  margin-left: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 40px;
+}
+
+.nav-link {
+  background-image: linear-gradient(120deg, #800080 30%, #ee82ee);
+  text-shadow: 6px 6px 8px #e0ffff;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  font-size: 40px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+}
+.nav-link:hover,
+.nav-link:focus {
+  background-image: linear-gradient(120deg, #6a5acd 30%, #87ceeb);
+  text-shadow: 6px 6px 8px #e0ffff;
+}
