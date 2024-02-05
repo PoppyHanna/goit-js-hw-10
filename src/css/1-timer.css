@@ -10,6 +10,24 @@ body {
   gap: 15px;
 }
 
+.link-1 {
+  color: #8b008b;
+  padding-left: 50px;
+  font-size: 25px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.5;
+  text-decoration: none;
+}
+.link-1:hover,
+.link-1:focus {
+  background: linear-gradient(120deg, #6a5acd 30%, #87ceeb);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  text-shadow: 6px 6px 8px #e0ffff;
+}
+
 .title {
   font-family: 'Montserrat', sans-serif;
   display: inline-block;
