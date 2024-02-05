@@ -8,6 +8,8 @@ const startButton = document.querySelector('[data-start]');
 const timerFields = document.querySelectorAll('.timer [data-days], .timer [data-hours], .timer [data-minutes], .timer [data-seconds]');
 
 let userSelectedDate;
+let timerActive = false; 
+let intervalId;
 
 const options = {
   enableTime: true,
@@ -34,28 +36,35 @@ flatpickr("#datetime-picker", options);
 startButton.addEventListener('click', startTimer);
 
 function startTimer() {
+  if (timerActive) {
+    return;
+  }
+
   startButton.disabled = true;
   datetimePicker.disabled = true;
 
-  const intervalId = setInterval(updateTimer, 1000);
+  intervalId = setInterval(updateTimer, 1000);
+  timerActive = true;
 
   function updateTimer() {
     const timeRemaining = userSelectedDate - new Date();
-    const { days, hours, minutes, seconds } = convertMs(timeRemaining);
-
-    timerFields[0].textContent = addLeadingZero(days);
-    timerFields[1].textContent = addLeadingZero(hours);
-    timerFields[2].textContent = addLeadingZero(minutes);
-    timerFields[3].textContent = addLeadingZero(seconds);
 
     if (timeRemaining <= 0) {
       clearInterval(intervalId);
       iziToast.success({
         title: 'Countdown Finished',
-        message: 'The countdown has reached the end!',
+        message: 'The countdown has reached the end! Please refresh the page.',
       });
-      startButton.disabled = false;
-      datetimePicker.disabled = false;
+      startButton.disabled = true;
+      datetimePicker.disabled = true;
+      timerActive = false;
+    } else {
+      const { days, hours, minutes, seconds } = convertMs(timeRemaining);
+
+      timerFields[0].textContent = addLeadingZero(days);
+      timerFields[1].textContent = addLeadingZero(hours);
+      timerFields[2].textContent = addLeadingZero(minutes);
+      timerFields[3].textContent = addLeadingZero(seconds);
     }
   }
 }
@@ -77,4 +86,3 @@ function convertMs(ms) {
 function addLeadingZero(value) {
   return value.toString().padStart(2, '0');
 }
-
