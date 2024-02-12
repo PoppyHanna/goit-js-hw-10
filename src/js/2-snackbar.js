@@ -1,14 +1,17 @@
+
 import iziToast from "izitoast/dist/js/iziToast.min.js";
 import "izitoast/dist/css/iziToast.min.css";
 
-document.addEventListener('submit', (event) => {
+const form = document.querySelector('.form');
+const delayInput = form.querySelector('input[name="delay"]');
+const stateInputs = form.querySelectorAll('input[name="state"]');
+
+form.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const form = document.querySelector('.form');
-    const delayInput = form.querySelector('input[name="delay"]');
-    const stateInput = form.querySelector('input[name="state"]:checked');
+    const selectedStateInput = Array.from(stateInputs).find(input => input.checked);
 
-    if (!delayInput.checkValidity() || !stateInput) {
+    if (!delayInput.checkValidity() || !selectedStateInput) {
         iziToast.error({
             title: 'Error',
             message: 'Please enter a valid delay and select a state.',
@@ -21,7 +24,7 @@ document.addEventListener('submit', (event) => {
 
     const promise = new Promise((resolve, reject) => {
         setTimeout(() => {
-            if (stateInput.value === 'fulfilled') {
+            if (selectedStateInput.value === 'fulfilled') {
                 resolve(delay);
             } else {
                 reject(delay);
@@ -40,6 +43,6 @@ document.addEventListener('submit', (event) => {
                 message: `Rejected promise in ${delay}ms`,
             });
         });
-   form.reset();
-});
 
+    form.reset();
+});
